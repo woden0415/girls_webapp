@@ -28,8 +28,9 @@ class Home extends Component {
     console.log(imgList)
     axios.get( imgList, {
       params: {
-        pageNo: Number.parseInt(Math.random() * 1600),
-        pageSize: 50
+        // pageNo: Number.parseInt(Math.random() * 800),
+        pageNo: 2,
+        pageSize: 100
       }
     })
     .then((response) => {
