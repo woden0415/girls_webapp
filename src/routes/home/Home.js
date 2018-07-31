@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import Swiper from 'swiper'
-// import Swiper from 'react-id-swiper/lib/custom';
+import { connect } from 'dva';
 
 import {
   imgList
@@ -28,8 +28,7 @@ class Home extends Component {
     console.log(imgList)
     axios.get( imgList, {
       params: {
-        // pageNo: Number.parseInt(Math.random() * 800),
-        pageNo: 2,
+        pageNo: Number.parseInt(Math.random() * 800, 10),
         pageSize: 100
       }
     })
@@ -56,6 +55,7 @@ class Home extends Component {
 
 
   render() {
+    console.log(this.props)
     let {
       imgArr
     } = this.state;
@@ -63,11 +63,9 @@ class Home extends Component {
     return (
       <div className="swiper-container" ref='lun'>
         <div className="swiper-wrapper">
-
         {imgArr.map((urlItem, index, arr) => {
           return <div className="swiper-slide swiper-lazy imgBox" key={index} data-id={index} data-background={`${urlItem}`}><div className="swiper-lazy-preloader"></div></div>
         })}
-
         </div>
         <div className="swiper-pagination"></div>
       </div>
@@ -75,4 +73,8 @@ class Home extends Component {
   }
 }
 
-export default Home;
+// export default Home;
+
+export default connect(({ app }) => ({
+  app,
+}))(Home);
