@@ -1,6 +1,11 @@
 const menuGlobal = [
   {
+    id: 'index',
+    name: 'index页',
     path: '/',
+    models: ()=>[
+      import ('../models/home')
+    ],
     component: ()=>
       import ('../routes/home/Home')
   },
