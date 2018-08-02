@@ -1,13 +1,18 @@
 import React from 'react';
 import { Router, Route, Switch } from 'dva/router';
 import dynamic from 'dva/dynamic'
+import Navigator from './components/navigator/Navigator';
+
+
 import {config} from './utils'
 const { menuGlobal } = config
+
 
 function RouterConfig({ history, app }) {
 
   return (
-      <Router history={history} style={{width: 360, height: 640}}>
+    <div style={{width: '100%', height: '100%', position: 'relative'}}>
+      <Router history={history}>
         <Switch>
           {
             menuGlobal.map(({path, ...dynamics}, index) => (
@@ -21,7 +26,10 @@ function RouterConfig({ history, app }) {
           }
         </Switch>
       </Router>
+      <Navigator />
+    </div>
   );
 }
 
 export default RouterConfig;
+
