@@ -29,7 +29,7 @@ class Home extends Component {
       payload: {
         params: {
           pageNo: Number.parseInt(Math.random() * 800, 10),
-          pageSize: 100
+          pageSize: 10
         }
       }
     })
@@ -40,17 +40,19 @@ class Home extends Component {
   }
 
   componentDidUpdate(){
-    if (this.swiper) {
+    console.timeEnd();
+    // if (this.swiper) {
+      //   this.swiper.slideTo(0, 0);
+      //   this.swiper.destroy();
+      //   this.swiper = null;
+      // }
+      this.swiper = new Swiper(this.refs.lun, {
+        direction: 'vertical',
+        lazy: {
+          loadPrevNext: true,
+        }
+      });
       this.swiper.slideTo(0, 0);
-      // this.swiper.destroy();
-      this.swiper = null;
-    }
-    this.swiper = new Swiper(this.refs.lun, {
-      direction: 'vertical',
-      lazy: {
-        loadPrevNext: true,
-      }
-    });
   }
 
   handleImgClick(imgUrl){
@@ -62,7 +64,7 @@ class Home extends Component {
     let {
       arrImgUrls
     } = this.props.home;
-
+    console.time();
     return (
       <div className="swiper-container" ref='lun'>
         <div className="swiper-wrapper">
@@ -70,7 +72,7 @@ class Home extends Component {
           return (
             <div
               className="swiper-slide swiper-lazy imgBox"
-              key={index}
+              key={urlItem + index}
               data-id={index}
               data-background={`${urlItem}`}
               onClick={()=>{this.handleImgClick(urlItem)}}>

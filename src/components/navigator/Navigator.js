@@ -37,7 +37,7 @@ class Navigator extends Component {
             payload: {
               params: {
                 pageNo: Number.parseInt(Math.random() * 800, 10),
-                pageSize: 100
+                pageSize: 10
               }
             }
           });
