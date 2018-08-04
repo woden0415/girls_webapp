@@ -2,8 +2,12 @@
 import axios from 'axios'
 
 import {
-  imgList
+  imgList,
+  imgUrl
 } from '../config/api'
+
+// 启用反防盗链技术
+let isPreventImgUrl = false;
 
 export default {
 
@@ -37,7 +41,6 @@ export default {
         type: 'changeFootIconFn',
         payload: undefined
       })
-
     },
 
     // 改变按钮刷新状态
@@ -53,9 +56,17 @@ export default {
   reducers: {
     // 获取图片数据
     fetchImgsUrlFn(state, action) {
+      let arrTmp = []
+      if (isPreventImgUrl) {
+        arrTmp = action.payload.map((imgUrlItem, index, arr) => {
+          return `${imgUrl}?url=${imgUrlItem}`;
+        })
+      } else {
+        arrTmp = action.payload;
+      }
       return {
         ...state,
-        arrImgUrls: action.payload
+        arrImgUrls: arrTmp
       }
     },
 

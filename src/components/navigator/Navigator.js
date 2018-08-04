@@ -14,6 +14,19 @@ class Navigator extends Component {
     this.handleNavItemClick = this.handleNavItemClick.bind(this);
   }
 
+  shouldComponentUpdate(nextProps, nextState){
+    if (this.props.home && nextProps.home) {
+      if (JSON.stringify(this.props.home.arrNav) === JSON.stringify(nextProps.home.arrNav)) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
+    // return true
+  }
+
   /**
    * @description 点击当前底部按钮
    * @param {Number} index 当前点击项的下表
@@ -37,11 +50,11 @@ class Navigator extends Component {
             payload: {
               params: {
                 pageNo: Number.parseInt(Math.random() * 800, 10),
-                pageSize: 10
+                pageSize: 100
               }
             }
           });
-        }, 1000)
+        }, 500)
 
 
         break;
@@ -52,6 +65,7 @@ class Navigator extends Component {
   }
 
   render(){
+    console.log('Navigator')
     if (this.props.home) {
       let {
         arrNav,

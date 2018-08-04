@@ -15,7 +15,7 @@ class Home extends Component {
   constructor(props){
     super();
     this.state={
-      arrImgUrls: []
+
     };
     this.handleImgClick = this.handleImgClick.bind(this);
   }
@@ -29,42 +29,45 @@ class Home extends Component {
       payload: {
         params: {
           pageNo: Number.parseInt(Math.random() * 800, 10),
-          pageSize: 10
+          pageSize: 100
         }
       }
     })
   }
 
-  componentDidMount(){
-    console.log(2)
+  shouldComponentUpdate(nextProps, nextState) {
+    if (JSON.stringify(this.props.home.arrImgUrls) === JSON.stringify(nextProps.home.arrImgUrls)) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   componentDidUpdate(){
-    console.timeEnd();
-    // if (this.swiper) {
-      //   this.swiper.slideTo(0, 0);
-      //   this.swiper.destroy();
-      //   this.swiper = null;
-      // }
-      this.swiper = new Swiper(this.refs.lun, {
-        direction: 'vertical',
-        lazy: {
-          loadPrevNext: true,
-        }
-      });
-      this.swiper.slideTo(0, 0);
+    if (this.swiper) {
+      this.swiper.slideTo(0, 0)
+      this.swiper.destroy();
+      this.swiper = null;
+    }
+    this.swiper = new Swiper(this.refs.lun, {
+      direction: 'vertical',
+      lazy: {
+        loadPrevNext: true,
+        loadPrevNextAmount: 2
+      },
+    });
   }
 
   handleImgClick(imgUrl){
-    console.log(imgUrl);
-    console.log('home', this.props.home)
+    console.log('object')
   }
 
   render() {
+    console.log('Home')
     let {
       arrImgUrls
     } = this.props.home;
-    console.time();
+
     return (
       <div className="swiper-container" ref='lun'>
         <div className="swiper-wrapper">
