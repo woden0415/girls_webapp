@@ -7,7 +7,7 @@ import {
 } from '../config/api'
 
 // 启用反防盗链技术
-let isPreventImgUrl = false;
+let isPreventImgUrl = true;
 
 export default {
 
