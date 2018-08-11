@@ -4,13 +4,13 @@
  * @Description: 首页
  */
 
-import React, { Component } from 'react';
-import Swiper from 'swiper'
+import React, { PureComponent } from 'react';
+import Swiper from '../../../node_modules/swiper/dist/js/swiper'
 import { connect } from 'dva';
 
 import './Home.css';
 
-class Home extends Component {
+class Home extends PureComponent {
 
   constructor(props){
     super();
@@ -33,14 +33,6 @@ class Home extends Component {
         }
       }
     })
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (JSON.stringify(this.props.home.arrImgUrls) === JSON.stringify(nextProps.home.arrImgUrls)) {
-      return false;
-    } else {
-      return true;
-    }
   }
 
   componentDidUpdate(){
@@ -66,7 +58,7 @@ class Home extends Component {
     console.log('Home')
     let {
       arrImgUrls
-    } = this.props.home;
+    } = this.props;
 
     return (
       <div className="swiper-container" ref='lun'>
@@ -92,5 +84,5 @@ class Home extends Component {
 // export default Home;
 
 export default connect(({ home }) => ({
-  home,
+  arrImgUrls: home.arrImgUrls
 }))(Home);
