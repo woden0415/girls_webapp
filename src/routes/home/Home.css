@@ -61,3 +61,16 @@ body {
     font-size: 65px
   }
 }
+.class-favorite {
+  font-size: 35px;
+  position: absolute;
+  top: 46%;
+  right: 14px;
+  color: #fff;
+  text-shadow: #fff 0px 0px 2px;
+  opacity: 0.8;
+}
+.class-favorite.favorited {
+  color: #ea1c1c;
+  text-shadow: #ea1c1c 0px 0px 10px;
+}

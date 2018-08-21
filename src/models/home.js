@@ -59,7 +59,8 @@ export default {
       let arrTmp = []
       if (isPreventImgUrl) {
         arrTmp = action.payload.map((imgUrlItem, index, arr) => {
-          return `${imgUrl}?url=${imgUrlItem.coverUrl}`;
+          imgUrlItem.coverUrl = `${imgUrl}?url=${imgUrlItem.coverUrl}`
+          return imgUrlItem;
         })
       } else {
         arrTmp = action.payload;

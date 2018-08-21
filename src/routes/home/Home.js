@@ -62,6 +62,7 @@ class Home extends PureComponent {
     let {
       arrImgUrls
     } = this.props;
+    console.log(arrImgUrls)
 
     return (
       <div className="swiper-container" ref='lun'>
@@ -70,10 +71,11 @@ class Home extends PureComponent {
           return (
             <div
               className="swiper-slide swiper-lazy imgBox swiper-zoom-container"
-              key={urlItem + index}
-              data-id={index}
-              data-background={`${urlItem}`}
-              onDoubleClick={(e)=>{this.handleImgClick(e, urlItem)}}>
+              key={urlItem.coverUrl}
+              data-albumid={urlItem.albumId}
+              data-background={`${urlItem.coverUrl}`}
+              onDoubleClick={(e)=>{this.handleImgClick(e, urlItem.coverUrl)}}>
+              <span className="class-favorite iconfont icon-xin1"></span>
               <div className="swiper-lazy-preloader"></div>
             </div>
           )

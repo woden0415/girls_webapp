@@ -31,29 +31,7 @@ const menuGlobal = [
     ],
     component: () =>
       import ('../routes/AAA'),
-  },
-  {
-    id:'bbb',
-    pid:'2',
-    name:'bbb页',
-    path: '/aaa/bbb',
-    models: () => [
-      import ('../models/bbb')
-    ],
-    component: () =>
-      import ('../routes/BBB'),
-  },
-  {
-    id:'ccc',
-    pid:'3',
-    name:'ccc页',
-    path: '/ccc',
-    models: () => [
-      import ('../models/ccc')
-    ],
-    component: () =>
-      import ('../routes/CCC'),
-  },
+  }
 ];
 
 export default {
