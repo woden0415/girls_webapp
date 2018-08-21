@@ -49,8 +49,8 @@ class Navigator extends Component {
             type: 'home/fetchImgsUrl',
             payload: {
               params: {
-                pageNo: Number.parseInt(Math.random() * 800, 10),
-                pageSize: 100
+                pageNo: Number.parseInt(Math.random() * 112, 10),
+                pageSize: 10
               }
             }
           });

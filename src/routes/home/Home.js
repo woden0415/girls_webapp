@@ -28,8 +28,8 @@ class Home extends PureComponent {
       type: 'home/fetchImgsUrl',
       payload: {
         params: {
-          pageNo: Number.parseInt(Math.random() * 800, 10),
-          pageSize: 100
+          pageNo: Number.parseInt(Math.random() * 112, 10),
+          pageSize: 10
         }
       }
     })
@@ -42,6 +42,9 @@ class Home extends PureComponent {
       this.swiper = null;
     }
     this.swiper = new Swiper(this.refs.lun, {
+     zoom: {
+        toggle: false,
+      },
       direction: 'vertical',
       lazy: {
         loadPrevNext: true,
@@ -50,8 +53,8 @@ class Home extends PureComponent {
     });
   }
 
-  handleImgClick(imgUrl){
-    console.log('object')
+  handleImgClick(e, imgUrl){
+    console.log(e.clientX, e.clientY)
   }
 
   render() {
@@ -66,11 +69,11 @@ class Home extends PureComponent {
         {arrImgUrls.map((urlItem, index, arr) => {
           return (
             <div
-              className="swiper-slide swiper-lazy imgBox"
+              className="swiper-slide swiper-lazy imgBox swiper-zoom-container"
               key={urlItem + index}
               data-id={index}
               data-background={`${urlItem}`}
-              onClick={()=>{this.handleImgClick(urlItem)}}>
+              onDoubleClick={(e)=>{this.handleImgClick(e, urlItem)}}>
               <div className="swiper-lazy-preloader"></div>
             </div>
           )

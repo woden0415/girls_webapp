@@ -41,3 +41,23 @@ body {
   -webkit-align-items: center;
   align-items: center;
 }
+
+.heart {
+  position: absolute;
+  display: inline-block;
+  width: 20px;
+  height: 21px;
+  z-index: 13;
+  color: red;
+  font-size: 60px;
+  animation: heartShine 1s;
+}
+
+@keyframes heartShine {
+  from {
+    font-size: 60px;
+  }
+  to {
+    font-size: 65px
+  }
+}
