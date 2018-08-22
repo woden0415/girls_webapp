@@ -7,6 +7,8 @@
 import React, { PureComponent } from 'react';
 import Swiper from '../../../node_modules/swiper/dist/js/swiper'
 import { connect } from 'dva';
+import Hammer from 'hammerjs';
+
 
 import './Home.css';
 
@@ -51,6 +53,15 @@ class Home extends PureComponent {
         loadPrevNextAmount: 2
       },
     });
+
+    let favorites = document.querySelectorAll('.class-favorite');
+    for (let i = 0; i < favorites.length; i++) {
+      let hammer = new Hammer(favorites[i]);
+      hammer.on('doubletap', function(e) {
+        e.target.classList.toggle('favorited');
+      });
+
+    }
   }
 
   handleImgClick(e, imgUrl){
@@ -62,7 +73,6 @@ class Home extends PureComponent {
     let {
       arrImgUrls
     } = this.props;
-    console.log(arrImgUrls)
 
     return (
       <div className="swiper-container" ref='lun'>
@@ -75,7 +85,7 @@ class Home extends PureComponent {
               data-albumid={urlItem.albumId}
               data-background={`${urlItem.coverUrl}`}
               onDoubleClick={(e)=>{this.handleImgClick(e, urlItem.coverUrl)}}>
-              <span className="class-favorite iconfont icon-xin1"></span>
+              <span className="class-favorite iconfont icon-xin2"></span>
               <div className="swiper-lazy-preloader"></div>
             </div>
           )
