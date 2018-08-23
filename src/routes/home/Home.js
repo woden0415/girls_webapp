@@ -38,15 +38,14 @@ class Home extends PureComponent {
   }
 
   componentDidUpdate(){
+
+    // 初始化滚动
     if (this.swiper) {
       this.swiper.slideTo(0, 0)
       this.swiper.destroy();
       this.swiper = null;
     }
     this.swiper = new Swiper(this.refs.lun, {
-     zoom: {
-        toggle: false,
-      },
       direction: 'vertical',
       lazy: {
         loadPrevNext: true,
@@ -54,6 +53,28 @@ class Home extends PureComponent {
       },
     });
 
+    // 给屏幕添加左滑事件，左滑大于二分之一宽度时，进入下一个路由
+    console.log(this.refs.lun)
+    let lunSwiper = this.refs.lun;
+    let hammerLun = new Hammer(lunSwiper);
+    hammerLun.on('panleft', (e) => {
+      // @todo 获取偏移量，判断偏移量后路由
+      lunSwiper.style.transition = 'transform 0s';
+      lunSwiper.style.transform = `translateX(${e.deltaX}px)`
+    })
+    hammerLun.on('panend', (e) => {
+      let clientW = document.documentElement.clientWidth;
+      if (Math.abs(e.deltaX) > 0.75 * clientW) {
+        console.log('进入剩下路由')
+        window.location.href = `${window.location.protocol}//${window.location.host}/aaa`
+        console.log(e.deltaX)
+      } else {
+        lunSwiper.style.transition = 'transform 0.2s';
+        lunSwiper.style.transform = `translateX(0px)`
+      }
+    })
+
+    // 绑定点击心心事件
     let favorites = document.querySelectorAll('.class-favorite');
     for (let i = 0; i < favorites.length; i++) {
       let hammer = new Hammer(favorites[i]);
