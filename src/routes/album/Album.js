@@ -6,6 +6,8 @@
 
 import React, { PureComponent } from 'react'
 import { connect } from 'dva';
+import Hammer from 'hammerjs';
+
 import ImgLazyLoad from '../../utils/imgLazyLoad';
 import "./Album.css";
 
@@ -30,6 +32,16 @@ class Album extends PureComponent {
   componentDidUpdate() {
     let imgLazyLoad = new ImgLazyLoad(); // 添加懒加载
     imgLazyLoad.monitorScroll();
+
+    let domBtnGoBack = document.querySelector('.iconfont.icon-fanhui1');
+    if (domBtnGoBack) {
+      let hammerBack = new Hammer(domBtnGoBack);
+      hammerBack.on('tap', (e) => {
+        this.props.history.push(`/home`, {some: {
+          albumId: this.props.match.params.albumid
+        }})
+      })
+    }
   }
 
   render(){
@@ -38,7 +50,8 @@ class Album extends PureComponent {
       return (
         <div className="album-box">
           <div className="album-header">
-            <div className="album-cover" style={{backgroundImage: `url(${objAlbumInfo.coverUrl})`}}></div>
+            <span className="iconfont icon-fanhui1 js-goback" ref="btngoback"></span>
+            <div className="album-cover img-bg" data-src={objAlbumInfo.coverUrl}></div>
             <h1 className="album-title" data-id={objAlbumInfo.id}>{objAlbumInfo.title}</h1>
             <p className="album-desc">{objAlbumInfo.albumDesc}</p>
           </div>

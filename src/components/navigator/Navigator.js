@@ -56,7 +56,6 @@ class Navigator extends Component {
           });
         }, 500)
 
-
         break;
 
       default:

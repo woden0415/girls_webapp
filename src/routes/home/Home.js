@@ -23,10 +23,6 @@ class Home extends PureComponent {
   }
 
   componentWillMount() {
-
-  }
-
-  componentDidMount() {
     /**
      * @description 页面加载时请求数据
      */
@@ -39,6 +35,10 @@ class Home extends PureComponent {
         }
       }
     })
+  }
+
+  componentDidMount() {
+
   }
 
   componentDidUpdate(){
@@ -119,6 +119,7 @@ class Home extends PureComponent {
 
 // export default Home;
 
-export default connect(({ home }) => ({
+export default connect(({ app, home }) => ({
+  app,
   arrImgUrls: home.arrImgUrls
 }))(Home);
