@@ -23,7 +23,6 @@ const menuGlobal = [
   },
   {
     id:'aaa',
-    pid:'1',
     name:'aaa页',
     path: '/aaa',
     models: () => [
@@ -31,6 +30,16 @@ const menuGlobal = [
     ],
     component: () =>
       import ('../routes/AAA'),
+  },
+  {
+    id: 'album',
+    name: 'album页',
+    path: '/album/:albumid',
+    // path: '/album',
+    models: () => [
+      import ('../models/album')
+    ],
+    component: () => import ('../routes/album/Album')
   }
 ];
 

@@ -79,7 +79,8 @@ class Navigator extends Component {
               arrNav.map((navItem, index, arr) => {
                 return (
                   <div
-                    className={`${activeTab === index ? 'active': ''} nav-item`}
+                    // className={`${activeTab === index ? 'active': ''} nav-item`}
+                    className={'nav-item'}
                     key={index}
                     onClick={()=>{this.handleNavItemClick(index)}}>
                     {

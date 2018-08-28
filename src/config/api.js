@@ -6,5 +6,6 @@
 
 module.exports = {
   imgList: '/imgApi/imgs/url',
-  imgUrl: '/imgApi/imgUrl/url'
+  imgUrl: '/imgApi/imgUrl/url',
+  albumInfo: '/imgApi/albumInfo/url'
 }

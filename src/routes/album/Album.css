@@ -1,0 +1,50 @@
+.album-box {
+}
+
+.album-header {
+  padding: 5px;
+}
+
+.album-title {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1;
+  margin: 0;
+  text-align: center;
+}
+
+.album-cover {
+  width: 150px;
+  height: 150px;
+  background-size: cover;
+  border-radius: 50%;
+  margin: 30px auto 10px;
+}
+
+.album-desc {
+  font-size: 13px;
+  text-align: left;
+}
+
+.album-imgList-ul {
+  list-style-type: none;
+  padding: 0 6px;
+  font-size: 0;
+  overflow: hidden;
+}
+
+.album-imgList-li {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 49%;
+  height: 200px;
+  margin-bottom: 10px;
+  background-size: cover;
+  float: left;
+  border-radius: 4px;
+  box-shadow: 0px 4px 1px 0px #2727278a;;
+}
+
+.album-imgList-li:nth-child(2n) {
+  float: right;
+}

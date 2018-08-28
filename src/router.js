@@ -1,10 +1,10 @@
 import React from 'react';
-import { Router, Route, Switch } from 'dva/router';
+import { Router, Route, Switch, Redirect } from 'dva/router';
 import dynamic from 'dva/dynamic'
 import Navigator from './components/navigator/Navigator';
 
 
-import {config} from './utils'
+import { config } from './utils'
 const { menuGlobal } = config
 
 
@@ -15,14 +15,22 @@ function RouterConfig({ history, app }) {
       <Router history={history}>
         <Switch>
           {
-            menuGlobal.map(({path, ...dynamics}, index) => (
-              <Route
-              key={index}
-              path={path}
-              exact
-              component={dynamic({ app, ...dynamics })}
-              />
-            ))
+            menuGlobal.map(({path, ...dynamics}, index) => {
+              if (path === '/') {
+                return (
+                  <Route key={index} path={path} exact render={() => (
+                    <Redirect to="/home"/>
+                  )} />
+                )
+              } else {
+                return (
+                  <Route key={index} path={path} exact component={
+                    dynamic({ app, ...dynamics })
+                  } />
+                )
+              }
+            }
+            )
           }
         </Switch>
       </Router>

@@ -1,0 +1,62 @@
+/*
+* @Author: woden0415@163.com
+* @Date: 2018-08-26 14:25:36
+* @Description:
+*/
+
+import React, { PureComponent } from 'react'
+import { connect } from 'dva';
+import ImgLazyLoad from '../../utils/imgLazyLoad';
+import "./Album.css";
+
+class Album extends PureComponent {
+  constructor() {
+    super();
+    this.state={
+
+    };
+  }
+
+  componentDidMount() {
+    let albumId = this.props.match.params.albumid;
+    this.props.dispatch({
+      type: 'album/fetchAlbumList',
+      payload: {
+        albumId
+      }
+    })
+  }
+
+  componentDidUpdate() {
+    let imgLazyLoad = new ImgLazyLoad(); // 添加懒加载
+    imgLazyLoad.monitorScroll();
+  }
+
+  render(){
+    let objAlbumInfo = this.props.objAlbumInfo;
+    if (objAlbumInfo.imgLists.length > 0) {
+      return (
+        <div className="album-box">
+          <div className="album-header">
+            <div className="album-cover" style={{backgroundImage: `url(${objAlbumInfo.coverUrl})`}}></div>
+            <h1 className="album-title" data-id={objAlbumInfo.id}>{objAlbumInfo.title}</h1>
+            <p className="album-desc">{objAlbumInfo.albumDesc}</p>
+          </div>
+          <ul className="album-imgList-ul">
+            {objAlbumInfo.imgLists.map((item, index, arr) => {
+              return (
+                <li className="album-imgList-li img-bg" key={index} data-src={item}> </li>
+              )
+            })}
+          </ul>
+        </div>
+      )
+    } else {
+      return <h1>没有相关数据</h1>
+    }
+  }
+}
+
+export default connect(({ album }) => ({
+  objAlbumInfo: album.objAlbumInfo
+}))(Album);
