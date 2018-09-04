@@ -7,6 +7,8 @@
 import React, { Component } from 'react'
 import './navigator.css'
 import { connect } from 'dva';
+import { setPageIndex } from '../../utils/tools'
+import history from '../../utils/history'
 
 class Navigator extends Component {
   constructor(props){
@@ -24,38 +26,27 @@ class Navigator extends Component {
     } else {
       return true;
     }
-    // return true
   }
 
   /**
    * @description 点击当前底部按钮
    * @param {Number} index 当前点击项的下表
    */
-  handleNavItemClick(index){
+  handleNavItemClick(index) {
+    console.log(this.props)
     switch (index) {
       case 0:
-        // @TODO 切换当前刷新状态
         this.props.dispatch({
-          type: 'home/changeFootIcon',
+          type: 'app/changeFootIcon',
           payload: {
             index
           }
         })
-
-        // 通过dispatch请求新的数据
-        let that = this;
-        setTimeout(()=>{
-          that.props.dispatch({
-            type: 'home/fetchImgsUrl',
-            payload: {
-              params: {
-                pageNo: Number.parseInt(Math.random() * 112, 10),
-                pageSize: 10
-              }
-            }
-          });
-        }, 500)
-
+        history.push('/home')
+        setPageIndex(Number.parseInt(Math.random() * 112, 10), 10, 0)
+        setTimeout(() => {
+          window.location.reload()
+        }, 200);
         break;
 
       default:
@@ -65,11 +56,11 @@ class Navigator extends Component {
 
   render(){
     console.log('Navigator')
-    if (this.props.home) {
+    if (this.props.app) {
       let {
         arrNav,
         activeTab
-      } = this.props.home;
+      } = this.props.app;
 
       return (
         <div className = "nav-container">
@@ -99,6 +90,6 @@ class Navigator extends Component {
 }
 
 // export default Navigator
-export default connect(({ home }) => ({
-  home,
+export default connect(({ app }) => ({
+  app,
 }))(Navigator);

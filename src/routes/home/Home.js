@@ -9,6 +9,7 @@ import Swiper from '../../../node_modules/swiper/dist/js/swiper'
 import { connect } from 'dva';
 import Hammer from 'hammerjs';
 
+import { setStorage, getStorage, setPageIndex } from '../../utils/tools'
 
 import './Home.css';
 
@@ -26,15 +27,19 @@ class Home extends PureComponent {
     /**
      * @description 页面加载时请求数据
      */
+    let pageNo = Number(getStorage('pageNo')) || Number.parseInt(Math.random() * 112, 10);
+    let pageSize = Number(getStorage('pageSize')) || 10;
+    let albumIndex = Number(getStorage('albumIndex')) || 0;
     this.props.dispatch({
       type: 'home/fetchImgsUrl',
       payload: {
         params: {
-          pageNo: Number.parseInt(Math.random() * 112, 10),
-          pageSize: 10
+          pageNo: pageNo,
+          pageSize: pageSize
         }
       }
     })
+    setPageIndex(pageNo, pageSize, albumIndex)
   }
 
   componentDidMount() {
@@ -51,6 +56,7 @@ class Home extends PureComponent {
     }
     this.swiper = new Swiper(this.refs.lun, {
       direction: 'vertical',
+      initialSlide: Number(getStorage('albumIndex')) || 0,
       lazy: {
         loadPrevNext: true,
         loadPrevNextAmount: 2
@@ -66,7 +72,8 @@ class Home extends PureComponent {
     })
     hammerLun.on('panend', (e) => {
       let clientW = document.documentElement.clientWidth;
-      if (Math.abs(e.deltaX) > 0.3 * clientW) {
+      if (Math.abs(e.deltaX) > 0.2 * clientW) {
+        setStorage('albumIndex', e.target.dataset.index)
         this.props.history.push(`/album/${e.target.dataset.albumid}`, {some: ''})
       } else {
         lunSwiper.style.transition = 'transform 0.2s';
@@ -104,6 +111,7 @@ class Home extends PureComponent {
               className="swiper-slide swiper-lazy imgBox swiper-zoom-container"
               key={urlItem.coverUrl}
               data-albumid={urlItem.albumId}
+              data-index={index}
               data-background={`${urlItem.coverUrl}`}
               onDoubleClick={(e)=>{this.handleImgClick(e, urlItem.coverUrl)}}>
               <span className="class-favorite iconfont icon-xin2"></span>
@@ -119,7 +127,6 @@ class Home extends PureComponent {
 
 // export default Home;
 
-export default connect(({ app, home }) => ({
-  app,
+export default connect(({ home }) => ({
   arrImgUrls: home.arrImgUrls
 }))(Home);

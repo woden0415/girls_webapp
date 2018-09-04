@@ -51,7 +51,7 @@ class Album extends PureComponent {
         <div className="album-box">
           <div className="album-header">
             <span className="iconfont icon-fanhui1 js-goback" ref="btngoback"></span>
-            <div className="album-cover img-bg" data-src={objAlbumInfo.coverUrl}></div>
+            <div className="album-cover img-bg" data-src={`/imgApi/imgUrl/url?url=${objAlbumInfo.coverUrl}`}></div>
             <h1 className="album-title" data-id={objAlbumInfo.id}>{objAlbumInfo.title}</h1>
             <p className="album-desc">{objAlbumInfo.albumDesc}</p>
           </div>

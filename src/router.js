@@ -9,32 +9,33 @@ const { menuGlobal } = config
 
 
 function RouterConfig({ history, app }) {
-
   return (
     <div style={{width: '100%', height: '100%', position: 'relative'}}>
       <Router history={history}>
-        <Switch>
-          {
-            menuGlobal.map(({path, ...dynamics}, index) => {
-              if (path === '/') {
-                return (
-                  <Route key={index} path={path} exact render={() => (
-                    <Redirect to="/home"/>
-                  )} />
-                )
-              } else {
-                return (
-                  <Route key={index} path={path} exact component={
-                    dynamic({ app, ...dynamics })
-                  } />
-                )
+        <React.Fragment>
+          <Switch>
+            {
+              menuGlobal.map(({path, ...dynamics}, index) => {
+                if (path === '/') {
+                  return (
+                    <Route key={index} path={path} exact render={() => (
+                      <Redirect to="/home"/>
+                    )} />
+                  )
+                } else {
+                  return (
+                    <Route key={index} path={path} exact component={
+                      dynamic({ app, ...dynamics })
+                    } />
+                  )
+                }
               }
+              )
             }
-            )
-          }
-        </Switch>
+          </Switch>
+          <Navigator />
+        </React.Fragment>
       </Router>
-      <Navigator />
     </div>
   );
 }
