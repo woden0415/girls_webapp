@@ -17,6 +17,7 @@ class Album extends PureComponent {
     this.state={
 
     };
+    this.handleGoList = this.handleGoList.bind(this);
   }
 
   componentDidMount() {
@@ -44,6 +45,12 @@ class Album extends PureComponent {
     }
   }
 
+
+  handleGoList(index) {
+    let albumid = this.props.match.params.albumid;
+    this.props.history.push(`/album/list/${albumid}/${index}`)
+  }
+
   render(){
     let objAlbumInfo = this.props.objAlbumInfo;
     if (objAlbumInfo.imgLists.length > 0) {
@@ -58,7 +65,14 @@ class Album extends PureComponent {
           <ul className="album-imgList-ul">
             {objAlbumInfo.imgLists.map((item, index, arr) => {
               return (
-                <li className="album-imgList-li img-bg" key={index} data-src={item}> </li>
+                <li
+                  className="album-imgList-li img-bg"
+                  key={index}
+                  data-src={item}
+                  onClick={(e) => {
+                    this.handleGoList(index)
+                  }}>
+                </li>
               )
             })}
           </ul>

@@ -33,7 +33,6 @@ class Navigator extends Component {
    * @param {Number} index 当前点击项的下表
    */
   handleNavItemClick(index) {
-    console.log(this.props)
     switch (index) {
       case 0:
         this.props.dispatch({

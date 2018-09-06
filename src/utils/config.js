@@ -22,24 +22,22 @@ const menuGlobal = [
 
   },
   {
-    id:'aaa',
-    name:'aaa页',
-    path: '/aaa',
-    models: () => [
-      import ('../models/aaa')
-    ],
-    component: () =>
-      import ('../routes/AAA'),
-  },
-  {
     id: 'album',
     name: 'album页',
     path: '/album/:albumid',
-    // path: '/album',
     models: () => [
       import ('../models/album')
     ],
     component: () => import ('../routes/album/Album')
+  },
+  {
+    id: 'albumList',
+    name: 'albumList列表页面',
+    path: '/album/list/:albumid/:index',
+    models: () => [
+      import ('../models/album')
+    ],
+    component: () => import ('../routes/album/AlbumList')
   }
 ];
 

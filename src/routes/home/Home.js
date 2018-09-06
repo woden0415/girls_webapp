@@ -12,6 +12,7 @@ import Hammer from 'hammerjs';
 import { setStorage, getStorage, setPageIndex } from '../../utils/tools'
 
 import './Home.css';
+import '../../assets/css/douswiper.css'
 
 class Home extends PureComponent {
 
@@ -88,7 +89,6 @@ class Home extends PureComponent {
       hammer.on('doubletap', function(e) {
         e.target.classList.toggle('favorited');
       });
-
     }
   }
 
@@ -97,7 +97,6 @@ class Home extends PureComponent {
   }
 
   render() {
-    console.log('Home')
     let {
       arrImgUrls
     } = this.props;
