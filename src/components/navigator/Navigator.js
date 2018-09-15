@@ -42,7 +42,7 @@ class Navigator extends Component {
           }
         })
         history.push('/home')
-        setPageIndex(Number.parseInt(Math.random() * 112, 10), 10, 0)
+        setPageIndex(Number.parseInt(Math.random() * 748, 10), 10, 0)
         setTimeout(() => {
           window.location.reload()
         }, 200);
@@ -57,8 +57,8 @@ class Navigator extends Component {
     console.log('Navigator')
     if (this.props.app) {
       let {
-        arrNav,
-        activeTab
+        arrNav
+
       } = this.props.app;
 
       return (
@@ -68,8 +68,7 @@ class Navigator extends Component {
               arrNav.map((navItem, index, arr) => {
                 return (
                   <div
-                    // className={`${activeTab === index ? 'active': ''} nav-item`}
-                    className={'nav-item'}
+                    className={'active nav-item'}
                     key={index}
                     onClick={()=>{this.handleNavItemClick(index)}}>
                     {

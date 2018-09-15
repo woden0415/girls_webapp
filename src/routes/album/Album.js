@@ -22,6 +22,7 @@ class Album extends PureComponent {
 
   componentDidMount() {
     let albumId = this.props.match.params.albumid;
+    console.log('albumId', albumId)
     this.props.dispatch({
       type: 'album/fetchAlbumList',
       payload: {

@@ -1,6 +1,7 @@
 
 function getStorage(key) {
-  return window.sessionStorage.getItem(key);
+  let value = window.sessionStorage.getItem(key);
+  return value || 0;
 }
 
 function setStorage(key, value) {

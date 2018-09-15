@@ -28,7 +28,7 @@ class Home extends PureComponent {
     /**
      * @description 页面加载时请求数据
      */
-    let pageNo = Number(getStorage('pageNo')) || Number.parseInt(Math.random() * 112, 10);
+    let pageNo = Number(getStorage('pageNo')) || Number.parseInt(Math.random() * 748, 10);
     let pageSize = Number(getStorage('pageSize')) || 10;
     let albumIndex = Number(getStorage('albumIndex')) || 0;
     this.props.dispatch({
@@ -97,6 +97,7 @@ class Home extends PureComponent {
   }
 
   render() {
+    console.log('Home')
     let {
       arrImgUrls
     } = this.props;
