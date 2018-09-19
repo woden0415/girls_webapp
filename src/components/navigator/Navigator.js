@@ -42,7 +42,7 @@ class Navigator extends Component {
           }
         })
         history.push('/home')
-        setPageIndex(Number.parseInt(Math.random() * 748, 10), 10, 0)
+        setPageIndex(Number.parseInt(Math.random() * 1173, 10), 10, 0)
         setTimeout(() => {
           window.location.reload()
         }, 200);
